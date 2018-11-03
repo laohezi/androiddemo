@@ -13,19 +13,33 @@ class MindView : View {
 
 
     fun drawNode(node: Node) {
+        drawContent(node.content)
+        drawDecor(node)
+    }
 
+    /*
+    * 绘制父子node之间的连接线
+    * */
+    fun drawLine(parent: Node, child: Node) {
 
     }
 
-    fun drawLine() {
+
+    /*
+    * 绘制关系线
+    * */
+    fun drawRelationship(from: Node, to: Node) {
 
     }
 
-    fun drawLineNode(node: Node) {
+    fun drawDecor(node: Node) {
 
     }
 
-    fun drawRectNode(node: Node) {
+    /*
+   * 绘制内容
+   * */
+    private fun drawContent(content: Node.Content?) {
 
     }
 

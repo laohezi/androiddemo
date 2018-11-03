@@ -1,17 +1,22 @@
 package com.yunzhi.huiju.mindview
 
-class Node(var parent: Node? = null, var content: Content? = null, var childs:
-ArrayList<Node>? = null, var callOuts: ArrayList<Node>? = null, var nodeType: NodeType = NodeType
-        .NODE) {
-    class Content(val content: String = String())
+open class Node(var parent: Node? = null,
+                var content: Content? = null,//内容
+                var childs: ArrayList<Node>? = null,//子节点
+                var callOuts: ArrayList<CallOut>? = null,//注释节点
+                var relateNodes: ArrayList<Node>? = null//连接节点,本节点为出发点
+
+) {
+    class Content(
+            val content: String = String()//html文本或者是富文本编辑器保存的内容,格式暂时还不固定
+    )
 
     class Style {
+        var width: Int = -1 //边框宽度,默认为-1,表示没有限制
+
 
     }
 
-    enum class NodeType {
-        NODE, CALL_OUT, FLOAT_NODE
-    }
 
     enum class State {
         FOLD, UNFOLD
@@ -22,8 +27,8 @@ ArrayList<Node>? = null, var callOuts: ArrayList<Node>? = null, var nodeType: No
             childs = ArrayList<Node>()
         }
         childs!!.add(index, node)
-
     }
+
 
     fun addNode(node: Node) {
         if (childs == null) {
@@ -45,22 +50,22 @@ ArrayList<Node>? = null, var callOuts: ArrayList<Node>? = null, var nodeType: No
     }
 
 
-    fun addCallOut(index: Int, node: Node) {
+    fun addCallOut(index: Int, node: CallOut) {
         if (callOuts == null) {
-            callOuts = ArrayList<Node>()
+            callOuts = ArrayList<CallOut>()
         }
         callOuts!!.add(index, node)
 
     }
 
-    fun addCallOut(node: Node) {
+    fun addCallOut(node: CallOut) {
         if (callOuts == null) {
-            childs = ArrayList<Node>()
+            callOuts = ArrayList<CallOut>()
         }
         callOuts!!.add(node)
     }
 
-    fun removeCallOut(node: Node) {
+    fun removeCallOut(node: CallOut) {
         callOuts?.let {
             it.remove(node)
         }
